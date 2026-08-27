@@ -49,7 +49,7 @@ export default function Journey() {
             {/* Mobile Image (Shows first on mobile) */}
             <div ref={addToRefs} className="w-full lg:hidden reveal">
               <div className="p-2 border border-[#C59A4E]/30 bg-[#160B07] shadow-xl">
-                <img src="/images/india-performance.png" alt="Performances in India" className="w-full h-auto aspect-[4/3] object-cover" loading="lazy" />
+                <img src="/images/performance-1.png" alt="Performances in India" className="w-full h-auto aspect-[4/3] object-cover" loading="lazy" />
               </div>
             </div>
 
@@ -76,7 +76,7 @@ export default function Journey() {
             {/* Desktop Image */}
             <div ref={addToRefs} className="hidden lg:block w-full lg:w-1/2 reveal" style={{ transitionDelay: '200ms' }}>
               <div className="p-3 border border-[#C59A4E]/20 bg-[#1A0E09] shadow-2xl">
-                <img src="/images/india-performance.png" alt="Performances in India" className="w-full h-[400px] object-cover filter brightness-90 hover:brightness-100 transition-all duration-500" loading="lazy" />
+                <img src="/images/performance-1.png" alt="Performances in India" className="w-full h-[400px] object-cover filter brightness-90 hover:brightness-100 transition-all duration-500" loading="lazy" />
               </div>
             </div>
           </div>

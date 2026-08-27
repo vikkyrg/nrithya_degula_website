@@ -19,7 +19,7 @@ export default function NrityaSanje() {
             <div className="bg-[#1A0E09] p-3 shadow-2xl rounded-sm border border-[#C59A4E]/20 relative">
               <div className="aspect-[4/3] sm:aspect-[16/9] lg:aspect-[4/3] rounded-sm overflow-hidden bg-[#160B07]">
                 <img 
-                  src="/images/nritya-sanje.png" 
+                  src="/images/celebrate.png" 
                   alt="Nritya Sanje Performance"
                   className="w-full h-full object-cover transition-transform duration-1000 hover:scale-[1.03] filter brightness-90 hover:brightness-100"
                   loading="lazy"

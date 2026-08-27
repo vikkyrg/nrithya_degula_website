@@ -34,25 +34,33 @@ export default function Branches() {
             <div 
               key={branch}
               ref={addToRefs}
-              className="bg-[#FFFFFF] p-8 border border-[#C59A4E]/20 relative group hover:shadow-lg transition-all duration-300 reveal flex flex-col items-center text-center"
+              className="relative p-8 border border-[#C59A4E]/20 group hover:shadow-xl transition-all duration-300 reveal flex flex-col items-center justify-center text-center overflow-hidden min-h-[220px] rounded-sm"
               style={{ transitionDelay: `${Math.min(300 + (index * 100), 800)}ms` }}
             >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-700 group-hover:scale-110"
+                style={{ backgroundImage: `url('/images/${index + 1}.jpeg')` }}
+              />
+              
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors duration-500 z-0" />
               
               {/* Subtle Numbering */}
-              <div className="absolute top-4 left-4 text-[#C59A4E]/30 font-serif font-bold text-sm tracking-widest group-hover:text-[#C59A4E]/50 transition-colors">
+              <div className="absolute top-4 left-4 text-white/50 font-serif font-bold text-sm tracking-widest group-hover:text-[#C59A4E] transition-colors z-10">
                 {String(index + 1).padStart(2, '0')}
               </div>
 
               {/* Gold Top Accent Line */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#C59A4E] group-hover:w-full transition-all duration-500" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-[#C59A4E] group-hover:w-full transition-all duration-500 z-10" />
 
               {/* Icon */}
-              <div className="mb-5 text-[#C59A4E] transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform duration-300">
+              <div className="mb-5 text-[#C59A4E] transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform duration-300 z-10">
                 <MapPin size={28} strokeWidth={1.5} />
               </div>
               
               {/* Branch Name */}
-              <h3 className="text-xl font-serif font-bold text-[#3B2818] tracking-wide">
+              <h3 className="text-xl font-serif font-bold text-white tracking-wide z-10 drop-shadow-md">
                 {branch}
               </h3>
               

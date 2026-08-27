@@ -105,7 +105,7 @@ export default function Offerings() {
                 {/* Image */}
                 <div className="w-3/4 mx-auto overflow-hidden rounded-sm border border-[#C59A4E]/20 mb-8">
                   <img 
-                    src="/images/offering.png" 
+                    src="/images/start.png" 
                     alt="Bharatanatyam Admissions" 
                     loading="lazy"
                     className="w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.03]"
