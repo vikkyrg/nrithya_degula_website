@@ -1,12 +1,12 @@
 export const siteData = {
-  academyName: "Nrityadeguia School of Dance",
+  academyName: "Nrityadegula School of Dance",
   tagline: "25+ Years of Preserving Tradition • Nurturing Talent • Creating Artists",
   footerTagline: "Tradition in our roots. Excellence in our journey.",
   contact: {
     phone: "+91 9980098657",
     email: "kamakshi1580@gmail.com",
     instagram: "nritya_degula",
-    facebook: "NrityaDegula School of Dance",
+    facebook: "Nrityadegula School of Dance",
   },
   vision: "“To preserve the purity of Bharatanatyam while inspiring every generation to experience, learn and carry forward its timeless beauty.”",
   guru: {
@@ -54,7 +54,7 @@ export const siteData = {
     "Chennai",
     "Chidambaram",
     "Thanjavur",
-    "Lopakshi",
+    "Lepakshi",
     "Mysore",
     "Hampi",
     "Several other cultural and heritage destinations"

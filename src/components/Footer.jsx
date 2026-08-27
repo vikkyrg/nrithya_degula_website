@@ -16,38 +16,38 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#110805] text-[#F4EBDD] border-t border-[#C59A4E]/20 relative overflow-hidden">
-      
+
       {/* Decorative Top Accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[1px] bg-gradient-to-r from-transparent via-[#C59A4E]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
-        
+
         {/* =========================================
             EVENLY SPACED 4-COLUMN GRID
             ========================================= */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
-          
+
           {/* COLUMN 1: BRAND IDENTITY & ABOUT */}
           <div className="flex flex-col items-start pr-0 lg:pr-4">
             <div className="flex items-center gap-4 mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-[#C59A4E] blur-xl opacity-10 rounded-full" />
-                <img 
-                  src="/images/home/nrityadeguia-sunburst-logo.png" 
-                  alt="Nrityadeguia Logo" 
-                  className="h-16 w-auto object-contain relative z-10" 
+                <img
+                  src="/images/home/nrityadegula-sunburst-logo.png"
+                  alt="Nrityadegula Logo"
+                  className="h-16 w-auto object-contain relative z-10"
                 />
               </div>
               <div className="flex flex-col">
                 <h2 className="font-serif font-bold text-xl text-[#C59A4E] tracking-widest leading-none mb-1">
-                  NRITYADEGUIA
+                  Nrityadegula
                 </h2>
                 <p className="text-[9px] uppercase tracking-[0.3em] text-[#F4EBDD]/60 font-medium">
                   School of Dance
                 </p>
               </div>
             </div>
-            
+
             {/* Expanded Content Section */}
             <p className="font-serif italic text-[#C59A4E] text-base mb-3 font-semibold">
               "{siteData.footerTagline}"
@@ -58,34 +58,34 @@ export default function Footer() {
 
             {/* Socials Block */}
             <div className="flex items-center gap-4">
-              <a 
-                href={`https://instagram.com/${siteData.contact.instagram}`} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="Instagram" 
+              <a
+                href={`https://instagram.com/${siteData.contact.instagram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
                 className="w-10 h-10 bg-[#1A0E09] border border-[#C59A4E]/30 rounded-full flex items-center justify-center text-[#C59A4E] hover:bg-[#C59A4E] hover:text-[#1A0E09] hover:border-[#C59A4E] transition-all duration-300 shadow-sm"
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
               </a>
               {siteData.contact.facebook.startsWith('http') ? (
-                <a 
-                  href={siteData.contact.facebook} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  aria-label="Facebook" 
+                <a
+                  href={siteData.contact.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
                   className="w-10 h-10 bg-[#1A0E09] border border-[#C59A4E]/30 rounded-full flex items-center justify-center text-[#C59A4E] hover:bg-[#C59A4E] hover:text-[#1A0E09] hover:border-[#C59A4E] transition-all duration-300 shadow-sm"
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
                 </a>
               ) : (
-                <a 
-                  href={`https://facebook.com/${siteData.contact.facebook}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  aria-label="Facebook" 
+                <a
+                  href={`https://facebook.com/${siteData.contact.facebook}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
                   className="w-10 h-10 bg-[#1A0E09] border border-[#C59A4E]/30 rounded-full flex items-center justify-center text-[#C59A4E] hover:bg-[#C59A4E] hover:text-[#1A0E09] hover:border-[#C59A4E] transition-all duration-300 shadow-sm"
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
                 </a>
               )}
             </div>
@@ -100,7 +100,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-4">
               {navLinks.map(link => (
                 <li key={link.label}>
-                  <a 
+                  <a
                     href={link.href}
                     className="group flex items-center text-[#F4EBDD]/70 hover:text-[#C59A4E] transition-colors duration-300 text-sm tracking-wide"
                   >
@@ -136,9 +136,9 @@ export default function Footer() {
               <span className="w-1.5 h-1.5 rotate-45 bg-[#C59A4E]/60" />
               Connect
             </h3>
-            
+
             <div className="flex flex-col gap-6">
-              
+
               <a href={`tel:${siteData.contact.phone.replace(/\s+/g, '')}`} className="flex items-start gap-4 group bg-[#1A0E09]/50 p-4 rounded-sm border border-[#C59A4E]/10 hover:border-[#C59A4E]/30 transition-all duration-300">
                 <div className="w-10 h-10 rounded-full bg-[#110805] border border-[#C59A4E]/20 flex items-center justify-center text-[#C59A4E] shrink-0 group-hover:scale-110 transition-transform duration-300">
                   <Phone size={16} />
@@ -152,7 +152,7 @@ export default function Footer() {
                   </span>
                 </div>
               </a>
-              
+
               <a href={`mailto:${siteData.contact.email}`} className="flex items-start gap-4 group bg-[#1A0E09]/50 p-4 rounded-sm border border-[#C59A4E]/10 hover:border-[#C59A4E]/30 transition-all duration-300">
                 <div className="w-10 h-10 rounded-full bg-[#110805] border border-[#C59A4E]/20 flex items-center justify-center text-[#C59A4E] shrink-0 group-hover:scale-110 transition-transform duration-300">
                   <Mail size={16} />
@@ -191,7 +191,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      
+
     </footer>
   );
 }

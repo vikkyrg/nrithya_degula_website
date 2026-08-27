@@ -25,12 +25,12 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 sm:py-24 lg:py-32 bg-[#FAF8F5] relative overflow-hidden">
-      
+
       {/* Decorative top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[1px] bg-gradient-to-r from-transparent via-[#C59A4E]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* SECTION HEADING */}
         <div className="text-center mb-16 lg:mb-20">
           <div ref={addToRefs} className="reveal">
@@ -51,18 +51,18 @@ export default function Contact() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          
+
           {/* =========================================
               LEFT COLUMN: CONTACT INFORMATION
               ========================================= */}
           <div ref={addToRefs} className="flex flex-col gap-10 reveal" style={{ transitionDelay: '100ms' }}>
-            
+
             <p className="text-[#3B2818]/80 text-lg leading-relaxed font-serif max-w-lg text-center lg:text-left mx-auto lg:mx-0">
-              Start your journey with Nrityadeguia School of Dance. Reach out to us for admissions, performance enquiries, or any other information.
+              Start your journey with Nrityadegula School of Dance. Reach out to us for admissions, performance enquiries, or any other information.
             </p>
 
             <div className="flex flex-col gap-6 w-full max-w-md mx-auto lg:mx-0">
-              
+
               {/* Phone */}
               <div className="flex gap-6 items-center p-6 bg-[#FFFFFF] border border-[#C59A4E]/20 shadow-sm group">
                 <div className="w-12 h-12 bg-[#C59A4E] rounded-full flex items-center justify-center text-[#1A0E09] shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -95,10 +95,10 @@ export default function Contact() {
 
               {/* Socials */}
               <div className="flex flex-col sm:flex-row gap-6 items-center justify-center p-6 bg-[#FFFFFF] border border-[#C59A4E]/20 shadow-sm w-full">
-                
+
                 <a href={`https://instagram.com/${siteData.contact.instagram}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
                   <div className="w-10 h-10 bg-[#C59A4E] rounded-full flex items-center justify-center text-[#1A0E09] shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
                   </div>
                   <span className="text-[#3B2818]/80 text-sm font-serif font-bold group-hover:text-[#8C6208] transition-colors">
                     {siteData.contact.instagram}
@@ -109,7 +109,7 @@ export default function Contact() {
 
                 <a href={`https://facebook.com/${siteData.contact.facebook}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
                   <div className="w-10 h-10 bg-[#C59A4E] rounded-full flex items-center justify-center text-[#1A0E09] shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
                   </div>
                   <span className="text-[#3B2818]/80 text-sm font-serif font-bold group-hover:text-[#8C6208] transition-colors">
                     {siteData.contact.facebook}
@@ -125,12 +125,12 @@ export default function Contact() {
               RIGHT COLUMN: ENQUIRY FORM
               ========================================= */}
           <div ref={addToRefs} className="w-full max-w-lg mx-auto lg:mx-0 lg:max-w-none bg-[#FFFFFF] p-8 sm:p-10 border border-[#C59A4E]/20 shadow-xl reveal relative" style={{ transitionDelay: '300ms' }}>
-            
+
             {/* Form decorative corner */}
             <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-[#C59A4E] -translate-x-2 translate-y-2 opacity-50 pointer-events-none" />
 
             <h3 className="text-2xl font-serif font-bold text-[#3B2818] mb-8">Enquire Now</h3>
-            
+
             {isSubmitted ? (
               <div className="bg-[#FAF8F5] border border-[#C59A4E]/40 text-[#3B2818] p-8 text-center flex flex-col items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#C59A4E]/20 text-[#8C6208] flex items-center justify-center">
@@ -141,7 +141,7 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-xs uppercase tracking-widest font-bold text-[#3B2818]/70">Full Name *</label>
