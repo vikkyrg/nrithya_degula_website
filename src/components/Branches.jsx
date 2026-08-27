@@ -40,7 +40,7 @@ export default function Branches() {
               {/* Background Image */}
               <div 
                 className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-700 group-hover:scale-110"
-                style={{ backgroundImage: `url('/images/${index + 1}.jpeg')` }}
+                style={{ backgroundImage: `url('/images/${index + 1}.png')` }}
               />
               
               {/* Gradient Overlay */}
