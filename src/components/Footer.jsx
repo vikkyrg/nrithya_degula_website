@@ -185,7 +185,7 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <div className="w-1 h-1 rotate-45 bg-[#C59A4E]/40 hidden md:block" />
             <p className="text-[#C59A4E]/80 text-xs italic font-serif tracking-widest text-center">
-              Tradition Preserved.
+              Developed by Innomatrics Technologies
             </p>
             <div className="w-1 h-1 rotate-45 bg-[#C59A4E]/40 hidden md:block" />
           </div>
