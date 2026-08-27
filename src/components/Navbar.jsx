@@ -19,6 +19,7 @@ export default function Navbar() {
     { name: 'Journey', href: '#journey' },
     { name: 'Achievements', href: '#achievements' },
     { name: 'Offerings', href: '#offerings' },
+    { name: 'Gallery', href: '#gallery' },
     { name: 'Branches', href: '#branches' },
     { name: 'Contact', href: '#contact' },
   ];

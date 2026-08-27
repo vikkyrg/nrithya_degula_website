@@ -6,6 +6,7 @@ import Journey from './components/Journey';
 import Workshop from './components/Workshop';
 import NrityaSanje from './components/NrityaSanje';
 import Offerings from './components/Offerings';
+import Gallery from './components/Gallery';
 import Branches from './components/Branches';
 import Vision from './components/Vision';
 import Contact from './components/Contact';
@@ -23,6 +24,7 @@ function App() {
         <Workshop />
         <NrityaSanje />
         <Offerings />
+        <Gallery />
         <Branches />
         <Vision />
         <Contact />
