@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { X, ZoomIn } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
   "Screenshot 2026-08-27 150958.png",
@@ -21,7 +21,30 @@ const images = [
 ].map(img => `/images/New folder/${img}`);
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+
+  const handlePrev = useCallback((e) => {
+    if (e) e.stopPropagation();
+    setSelectedIndex((prev) => (prev === null ? null : prev > 0 ? prev - 1 : prev));
+  }, []);
+
+  const handleNext = useCallback((e) => {
+    if (e) e.stopPropagation();
+    setSelectedIndex((prev) => (prev === null ? null : prev < images.length - 1 ? prev + 1 : prev));
+  }, []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedIndex === null) return;
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'Escape') setSelectedIndex(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex, handlePrev, handleNext]);
 
   return (
     <section id="gallery" className="py-20 bg-[#160B07] relative overflow-hidden border-t border-[#C59A4E]/10">
@@ -49,7 +72,7 @@ export default function Gallery() {
             <div 
               key={index} 
               className="group relative aspect-square overflow-hidden rounded-xl bg-black cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,154,78,0.3)] transition-all duration-500"
-              onClick={() => setSelectedImage(src)}
+              onClick={() => setSelectedIndex(index)}
             >
               <img 
                 src={src} 
@@ -69,25 +92,46 @@ export default function Gallery() {
       </div>
 
       {/* Lightbox Modal */}
-      {selectedImage && (
+      {selectedIndex !== null && (
         <div 
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4 transition-all duration-300"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedIndex(null)}
         >
           <button 
             className="absolute top-6 right-6 md:top-8 md:right-8 text-[#C59A4E] hover:text-white transition-colors duration-300 z-50 bg-black/50 hover:bg-[#C59A4E]/20 p-2 rounded-full border border-[#C59A4E]/30"
-            onClick={() => setSelectedImage(null)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedIndex(null);
+            }}
           >
             <X size={28} strokeWidth={1.5} />
           </button>
+
+          {selectedIndex > 0 && (
+            <button
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-[#C59A4E] hover:text-white transition-colors duration-300 z-50 bg-black/50 hover:bg-[#C59A4E]/20 p-2 md:p-3 rounded-full border border-[#C59A4E]/30"
+              onClick={handlePrev}
+            >
+              <ChevronLeft size={32} strokeWidth={1.5} />
+            </button>
+          )}
+
+          {selectedIndex < images.length - 1 && (
+            <button
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-[#C59A4E] hover:text-white transition-colors duration-300 z-50 bg-black/50 hover:bg-[#C59A4E]/20 p-2 md:p-3 rounded-full border border-[#C59A4E]/30"
+              onClick={handleNext}
+            >
+              <ChevronRight size={32} strokeWidth={1.5} />
+            </button>
+          )}
           
           <div 
             className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center animate-in zoom-in-95 duration-300" 
             onClick={(e) => e.stopPropagation()}
           >
             <img 
-              src={selectedImage} 
-              alt="Selected gallery view" 
+              src={images[selectedIndex]} 
+              alt={`Selected gallery view ${selectedIndex + 1}`} 
               className="max-w-full max-h-full object-contain rounded-md shadow-2xl border border-[#C59A4E]/20"
             />
           </div>
