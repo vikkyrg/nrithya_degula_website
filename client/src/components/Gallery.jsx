@@ -1,27 +1,31 @@
 import { useState, useEffect, useCallback } from 'react';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const images = [
-  "Screenshot 2026-08-27 150958.png",
-  "Screenshot 2026-08-27 151009.png",
-  "Screenshot 2026-08-27 151016.png",
-  "Screenshot 2026-08-27 151028.png",
-  "Screenshot 2026-08-27 151036.png",
-  "Screenshot 2026-08-27 151045.png",
-  "Screenshot 2026-08-27 151053.png",
-  "Screenshot 2026-08-27 151102.png",
-  "Screenshot 2026-08-27 151111.png",
-  "Screenshot 2026-08-27 151119.png",
-  "Screenshot 2026-08-27 151127.png",
-  "Screenshot 2026-08-27 151135.png",
-  "Screenshot 2026-08-27 151143.png",
-  "Screenshot 2026-08-27 151150.png",
-  "Screenshot 2026-08-27 151158.png",
-  "Screenshot 2026-08-27 151205.png"
-].map(img => `/images/New folder/${img}`);
-
 export default function Gallery() {
+  const [images, setImages] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const apiBaseUrl = import.meta.env.DEV ? '' : import.meta.env.VITE_API_BASE_URL;
+        const res = await fetch(`${apiBaseUrl}/api/gallery`);
+        if (!res.ok) {
+          throw new Error(`Server returned ${res.status}`);
+        }
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setImages(data);
+        } else {
+          setImages([]);
+        }
+      } catch (err) {
+        console.error('Error fetching gallery images:', err);
+        setImages([]);
+      }
+    };
+    fetchImages();
+  }, []);
 
   const handlePrev = useCallback((e) => {
     if (e) e.stopPropagation();
@@ -31,7 +35,7 @@ export default function Gallery() {
   const handleNext = useCallback((e) => {
     if (e) e.stopPropagation();
     setSelectedIndex((prev) => (prev === null ? null : prev < images.length - 1 ? prev + 1 : prev));
-  }, []);
+  }, [images.length]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -68,14 +72,14 @@ export default function Gallery() {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {images.map((src, index) => (
+          {images.map((image, index) => (
             <div 
-              key={index} 
+              key={image._id || index} 
               className="group relative aspect-square overflow-hidden rounded-xl bg-black cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,154,78,0.3)] transition-all duration-500"
               onClick={() => setSelectedIndex(index)}
             >
               <img 
-                src={src} 
+                src={image.imageData} 
                 alt={`Gallery image ${index + 1}`} 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 loading="lazy"
@@ -130,7 +134,7 @@ export default function Gallery() {
             onClick={(e) => e.stopPropagation()}
           >
             <img 
-              src={images[selectedIndex]} 
+              src={images[selectedIndex]?.imageData} 
               alt={`Selected gallery view ${selectedIndex + 1}`} 
               className="max-w-full max-h-full object-contain rounded-md shadow-2xl border border-[#C59A4E]/20"
             />
