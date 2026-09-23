@@ -8,7 +8,12 @@ export default function Gallery() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const apiBaseUrl = import.meta.env.DEV ? '' : import.meta.env.VITE_API_BASE_URL;
+        const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+        const isLocalhostUrl = (value) => /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\/?$/i.test(value || '');
+        const apiBaseUrl = (!configuredApiBaseUrl || isLocalhostUrl(configuredApiBaseUrl))
+          ? (import.meta.env.DEV ? '' : window.location.origin)
+          : configuredApiBaseUrl.replace(/\/$/, '');
+
         const res = await fetch(`${apiBaseUrl}/api/gallery`);
         if (!res.ok) {
           throw new Error(`Server returned ${res.status}`);
