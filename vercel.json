@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://nritya-server-l00k.onrender.com/api/:path*"
+      "destination": "https://nritiya-server-l00k.onrender.com/api/:path*"
     },
     {
       "source": "/(.*)",
