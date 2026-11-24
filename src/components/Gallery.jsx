@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
+import api from '../services/api';
 
 export default function Gallery() {
   const [images, setImages] = useState([]);
@@ -8,19 +9,9 @@ export default function Gallery() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const isLocalhostUrl = (value) => /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\/?$/i.test(value || '');
-        const apiBaseUrl = (!configuredApiBaseUrl || isLocalhostUrl(configuredApiBaseUrl))
-          ? (import.meta.env.DEV ? '' : window.location.origin)
-          : configuredApiBaseUrl.replace(/\/$/, '');
-
-        const res = await fetch(`${apiBaseUrl}/api/gallery`);
-        if (!res.ok) {
-          throw new Error(`Server returned ${res.status}`);
-        }
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          setImages(data);
+        const res = await api.get('/gallery');
+        if (Array.isArray(res.data)) {
+          setImages(res.data);
         } else {
           setImages([]);
         }
@@ -50,100 +41,135 @@ export default function Gallery() {
       if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'Escape') setSelectedIndex(null);
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, handlePrev, handleNext]);
 
   return (
-    <section id="gallery" className="py-20 bg-[#160B07] relative overflow-hidden border-t border-[#C59A4E]/10">
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#C59A4E]/5 blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#C59A4E]/5 blur-[120px]"></div>
-      </div>
+    <section id="gallery" className="py-20 sm:py-24 lg:py-32 bg-[#1A0E09] text-[#FAF8F5] relative overflow-hidden">
+      {/* Background Subtle Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C59A4E]/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-serif text-[#C59A4E] mb-4 tracking-wider uppercase">
-            Our Gallery
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Heading */}
+        <div className="text-center mb-16 lg:mb-20">
+          <span className="text-[#C59A4E] font-serif uppercase tracking-[0.25em] text-[10px] font-bold block mb-4">
+            Visual Symphony
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-[#FAF8F5] mb-6">
+            Moments in Motion
           </h2>
-          <div className="w-24 h-1 bg-[#C59A4E] mx-auto opacity-70 rounded-full mb-6"></div>
-          <p className="text-[#F4EBDD]/80 max-w-2xl mx-auto text-sm md:text-base font-light">
-            Glimpses of our vibrant performances, memorable events, and the essence of our dance journey.
-          </p>
+          <div className="flex justify-center">
+            <div className="flex items-center gap-4">
+              <div className="h-[1px] w-12 bg-[#C59A4E]/40" />
+              <div className="w-1.5 h-1.5 rotate-45 border border-[#C59A4E]/60" />
+              <div className="h-[1px] w-12 bg-[#C59A4E]/40" />
+            </div>
+          </div>
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {images.map((image, index) => (
-            <div 
-              key={image._id || index} 
-              className="group relative aspect-square overflow-hidden rounded-xl bg-black cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,154,78,0.3)] transition-all duration-500"
-              onClick={() => setSelectedIndex(index)}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {images.map((img, idx) => (
+            <div
+              key={img._id || idx}
+              onClick={() => setSelectedIndex(idx)}
+              className="group relative h-72 sm:h-80 overflow-hidden bg-[#24140D] border border-[#C59A4E]/20 cursor-pointer shadow-lg hover:border-[#C59A4E]/60 transition-all duration-500"
             >
-              <img 
-                src={image.imageData} 
-                alt={`Gallery image ${index + 1}`} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+              <img
+                src={img.imageData}
+                alt={img.altText || img.title || 'Nrithya Degula Gallery Image'}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                  <ZoomIn className="text-[#C59A4E] w-12 h-12 drop-shadow-[0_0_10px_rgba(197,154,78,0.5)]" strokeWidth={1} />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#160B07]/90 via-[#160B07]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <span className="text-xs uppercase tracking-widest text-[#C59A4E] font-medium mb-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  Nrithya Degula
+                </span>
+                <p className="font-serif text-lg font-bold text-[#FAF8F5] translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                  {img.title || 'Dance Moment'}
+                </p>
+                <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#1A0E09]/80 border border-[#C59A4E]/40 flex items-center justify-center text-[#C59A4E] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                  <ZoomIn size={16} />
                 </div>
               </div>
-              <div className="absolute inset-0 border-2 border-[#C59A4E]/0 group-hover:border-[#C59A4E]/40 rounded-xl transition-colors duration-500 pointer-events-none"></div>
             </div>
           ))}
         </div>
+
+        {images.length === 0 && (
+          <div className="text-center py-16 text-[#FAF8F5]/50 font-serif">
+            Capturing upcoming performance moments. Check back soon.
+          </div>
+        )}
       </div>
 
-      {/* Lightbox Modal */}
-      {selectedIndex !== null && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4 transition-all duration-300"
+      {/* Lightbox / Modal */}
+      {selectedIndex !== null && images[selectedIndex] && (
+        <div
+          className="fixed inset-0 z-50 bg-[#160B07]/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
           onClick={() => setSelectedIndex(null)}
         >
-          <button 
-            className="absolute top-6 right-6 md:top-8 md:right-8 text-[#C59A4E] hover:text-white transition-colors duration-300 z-50 bg-black/50 hover:bg-[#C59A4E]/20 p-2 rounded-full border border-[#C59A4E]/30"
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectedIndex(null);
-            }}
+          {/* Close button */}
+          <button
+            onClick={() => setSelectedIndex(null)}
+            className="absolute top-6 right-6 text-[#FAF8F5]/70 hover:text-[#C59A4E] transition-colors p-2 z-50"
+            aria-label="Close"
           >
-            <X size={28} strokeWidth={1.5} />
+            <X size={28} />
           </button>
 
-          {selectedIndex > 0 && (
+          {/* Left Arrow */}
+          {images.length > 1 && (
             <button
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-[#C59A4E] hover:text-white transition-colors duration-300 z-50 bg-black/50 hover:bg-[#C59A4E]/20 p-2 md:p-3 rounded-full border border-[#C59A4E]/30"
               onClick={handlePrev}
+              disabled={selectedIndex === 0}
+              className={`absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#1A0E09]/60 border border-[#C59A4E]/30 text-[#FAF8F5] transition-all z-50 ${
+                selectedIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#C59A4E] hover:text-[#1A0E09]'
+              }`}
+              aria-label="Previous image"
             >
-              <ChevronLeft size={32} strokeWidth={1.5} />
+              <ChevronLeft size={24} />
             </button>
           )}
 
-          {selectedIndex < images.length - 1 && (
-            <button
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-[#C59A4E] hover:text-white transition-colors duration-300 z-50 bg-black/50 hover:bg-[#C59A4E]/20 p-2 md:p-3 rounded-full border border-[#C59A4E]/30"
-              onClick={handleNext}
-            >
-              <ChevronRight size={32} strokeWidth={1.5} />
-            </button>
-          )}
-          
-          <div 
-            className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center animate-in zoom-in-95 duration-300" 
+          {/* Main Image Container */}
+          <div
+            className="relative max-w-5xl max-h-[85vh] flex flex-col items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <img 
-              src={images[selectedIndex]?.imageData} 
-              alt={`Selected gallery view ${selectedIndex + 1}`} 
-              className="max-w-full max-h-full object-contain rounded-md shadow-2xl border border-[#C59A4E]/20"
+            <img
+              src={images[selectedIndex].imageData}
+              alt={images[selectedIndex].altText || images[selectedIndex].title || 'Gallery image'}
+              className="max-h-[75vh] w-auto max-w-full object-contain border border-[#C59A4E]/30 shadow-2xl"
             />
+            {images[selectedIndex].title && (
+              <div className="mt-4 text-center">
+                <p className="font-serif text-lg text-[#FAF8F5] font-medium tracking-wide">
+                  {images[selectedIndex].title}
+                </p>
+              </div>
+            )}
+            <span className="text-xs uppercase tracking-widest text-[#C59A4E] mt-1">
+              {selectedIndex + 1} / {images.length}
+            </span>
           </div>
+
+          {/* Right Arrow */}
+          {images.length > 1 && (
+            <button
+              onClick={handleNext}
+              disabled={selectedIndex === images.length - 1}
+              className={`absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#1A0E09]/60 border border-[#C59A4E]/30 text-[#FAF8F5] transition-all z-50 ${
+                selectedIndex === images.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#C59A4E] hover:text-[#1A0E09]'
+              }`}
+              aria-label="Next image"
+            >
+              <ChevronRight size={24} />
+            </button>
+          )}
         </div>
       )}
     </section>
