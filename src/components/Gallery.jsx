@@ -78,7 +78,7 @@ export default function Gallery() {
             >
               <img
                 src={img.imageData}
-                alt={img.altText || img.title || 'Nrithya Degula Gallery Image'}
+                alt={img.altText || img.title || 'Nritya Degula Gallery Image'}
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy"
               />
@@ -86,7 +86,7 @@ export default function Gallery() {
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#160B07]/90 via-[#160B07]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                 <span className="text-xs uppercase tracking-widest text-[#C59A4E] font-medium mb-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  Nrithya Degula
+                  Nritya Degula
                 </span>
                 <p className="font-serif text-lg font-bold text-[#FAF8F5] translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
                   {img.title || 'Dance Moment'}

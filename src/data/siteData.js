@@ -36,7 +36,7 @@ export const siteData = {
     { year: "2008", title: "Natya Ratna" },
     { year: "2022", title: "Nritya Kala Sharadha" },
     { year: "2023", title: "Natya Shiromani" },
-    { year: "2025", title: "KALAKAKAS SEVA PRASHASTI" },
+    { year: "2025", title: "KARNATAKA SEVA PRASHASTI" },
     { year: "2025", title: "DR. M. LEELAVATHI PRASHASTI" },
     { year: "2025", title: "25 YEARS OF EXCELLENCE IN BHARATANATYAM" },
     { year: "2025", title: "BHARATANJALI ACHIEVERS AWARD" },
